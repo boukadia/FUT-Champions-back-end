@@ -18,4 +18,6 @@ $query="INSERT INTO players(nom,photo,clubID,nationalityID,rating,shooting,passi
             '$shooting','$passing','$pace','$dribbling',
             '$defending','$physical','$position')";
 $result= mysqli_query($connect,$query);
+
+
 ?>

@@ -1,17 +1,20 @@
 
-  
+
 <?php 
-include 'header.html';
-include 'database.php';
+require 'header.html';
+require 'database.php';
 
 
-$query = "SELECT players.nom, club.clubName, nationality.nationalityName, players.position, players.rating, players.pace, players.shooting, players.passing, players.dribbling, players.defending, players.physical
-        FROM players
+$query = "SELECT players.playerID, players.nom, club.clubName, nationality.nationalityName, players.position, players.rating, players.pace, players.shooting, players.passing, players.dribbling, players.defending, players.physical
+  FROM players
         JOIN club ON players.clubID = club.clubID
         JOIN nationality  ON players.nationalityID = nationality.nationalityID";
 
-$result = mysqli_query($connect,$query)
+$result = mysqli_query($connect,$query);
+$res=$result
 ?>
+
+<i  class="bi bi-pencil-square text-danger"></i>
 
 
 <div class="container">
@@ -52,20 +55,23 @@ $result = mysqli_query($connect,$query)
                     <td>" . htmlspecialchars($row['dribbling']) . "</td>
                     <td>" . htmlspecialchars($row['defending']) . "</td>
                     <td>" . htmlspecialchars($row['physical']) . "</td>
-                            <td>
-                        <button class='btn-modifier' data-id=''>Modifier</button>
-                    </td>
-                    <td>
-                        <button class='btn-supprimer' data-id=''>Supprimer</button>
-                    </td>
+
+                    <td><a href=\"editPlayer.php?id=" . $row['playerID'] . "\"><i class=\"fa-regular fa-pen-to-square\"></i></a>
+</td>
+                    <td><a href=\"deletePlayer.php?id=" . $row['playerID'] . "\"><i class=\"bi bi-trash-fill\"></i></a>
+</td>
                           </tr>";
-                }
+                          
+ }
             } else {
                 echo "<tr><td colspan='11'>No data found</td></tr>";
             }
+
+            
+
+
             ?>
         </tbody>
     </table>
 </div>
-
 

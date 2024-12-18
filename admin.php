@@ -210,7 +210,9 @@
     <div class="footer">
       
     </div>
+
   <?php include 'getPlayers.php'; ?>
+
 
 
     <script>
