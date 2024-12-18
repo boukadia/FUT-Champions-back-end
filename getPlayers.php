@@ -11,7 +11,7 @@ $query = "SELECT players.playerID, players.nom, club.clubName, nationality.natio
         JOIN nationality  ON players.nationalityID = nationality.nationalityID";
 
 $result = mysqli_query($connect,$query);
-$res=$result
+// $res=$result
 ?>
 
 <i  class="bi bi-pencil-square text-danger"></i>

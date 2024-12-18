@@ -3,34 +3,34 @@ require 'header.html';
 require 'database.php';
 
 // if (isset($_GET['id'])) 
-{
+
     $playerID = intval($_GET['id']);
     
     
-    $query="SELECT players.playerID, players.nom, club.clubName, nationality.nationalityName, players.position, players.rating, players.pace, players.shooting, players.passing, players.dribbling, players.defending, players.physical
+    $query="SELECT players.playerID, players.photo,players.nom, club.clubName, nationality.nationalityName, players.position, players.rating, players.pace, players.shooting, players.passing, players.dribbling, players.defending, players.physical
     FROM players
     JOIN club ON players.clubID = club.clubID and playerID=$playerID
     JOIN nationality  ON players.nationalityID = nationality.nationalityID and playerID = $playerID";
-    $result=mysqli_query($connect,$query);
+    // $result=mysqli_query($connect,$query);
+    $result = mysqli_query($connect,$query);
+    $player = $result->fetch_assoc();
+   
+   
+//     echo ($rating);
    
     // $stmt = $connect->prepare($query);
-    // $stmt->bind_param("i", $playerID);
+    // $stmt->bind_param("issssiiiiiii", $playerID);
     // $stmt->execute();
     // $result = $stmt->get_result();
 
-    // if ($result->num_rows > 0) {
-    //     // Fetch player data
-    //     $player = $result->fetch_assoc();
-    // } else {
-    //     echo "Joueur non trouvé.";
-    //     exit();
-    // }
+    // print_r($result->fetch_assoc());
 
-//     $stmt->close();
-// } else {
-//     echo "ID du joueur manquant.";
-//     exit();
-}
+    // if ($result->num_rows > 0)
+    //  {
+        
+  
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -44,12 +44,12 @@ require 'database.php';
     <div id="form" class="container">
       <h3 id="form-title">Edit Player</h3>
       <form action="" method="POST">
-          <input class="form-control mb-2" type="" name="playerID" value="<?php echo htmlspecialchars($result['players.playerID']); ?>">
+          <input class="form-control mb-2" type="hidden" name="playerID" value="<?php echo $player['playerID']; ?>">
 
           <input
               type="text"
               class="form-control mb-2"
-              value="<?php echo htmlspecialchars($result['players.nom']); ?>"
+              value="<?php echo ($player['nom']); ?>"
               name="playerName"
               placeholder="Player Name"
               required
@@ -59,21 +59,21 @@ require 'database.php';
               type="url"
               class="form-control mb-2"
               name="playerPhoto"
-              value="<?php echo htmlspecialchars($result['players.photo']); ?>"
+              value="<?php echo htmlspecialchars($player['photo']); ?>"
               placeholder="Player Photo URL"
           />
         
-          <input class="form-control mb-2" type="text" name="nationalityName" value="<?php echo htmlspecialchars($result['nationality.nationalityName']); ?>" >
+          <input class="form-control mb-2" type="text" name="nationalityName" value="<?php echo htmlspecialchars($player['nationalityName']) ?>" >
 
-          <input class="form-control mb-2" type="text" name="position" value="<?php echo htmlspecialchars($result['players.position']); ?>">
+          <input class="form-control mb-2" type="text" name="position" value="<?php echo htmlspecialchars($player['position']); ?>">
 
-          <input class="form-control mb-2" type="text" name="clubName" value="<?php echo htmlspecialchars($result['club.clubName']); ?>">
+          <input class="form-control mb-2" type="text" name="clubName" value="<?php echo htmlspecialchars($player['clubName']); ?>">
 
           <input
               type="number"
               class="form-control mb-2"
               name="pace"
-              value="<?php echo htmlspecialchars($result['players.pace']); ?>"
+              value="<?php echo htmlspecialchars($player['pace']); ?>"
               placeholder="Pace"
               required
           />
@@ -81,7 +81,7 @@ require 'database.php';
               type="number"
               class="form-control mb-2"
               name="shooting"
-              value="<?php echo htmlspecialchars($result['players.shooting']); ?>"
+              value="<?php echo htmlspecialchars($player['shooting']); ?>"
               placeholder="Shooting"
               required
           />
@@ -89,7 +89,7 @@ require 'database.php';
               type="number"
               class="form-control mb-2"
               name="passing"
-              value="<?php echo htmlspecialchars($result['players.passing']); ?>"
+              value="<?php echo htmlspecialchars($player['passing']); ?>"
               placeholder="Passing"
               required
           />
@@ -97,7 +97,7 @@ require 'database.php';
               type="number"
               class="form-control mb-2"
               name="dribbling"
-              value="<?php echo htmlspecialchars($player['players.dribbling']); ?>"
+              value="<?php echo htmlspecialchars($player['dribbling']); ?>"
               placeholder="Dribbling"
               required
           />
@@ -105,7 +105,7 @@ require 'database.php';
               type="number"
               class="form-control mb-2"
               name="defending"
-              value="<?php echo htmlspecialchars($player['players.defending']); ?>"
+              value="<?php echo htmlspecialchars($player['defending']); ?>"
               placeholder="Defending"
               required
           />
@@ -113,7 +113,7 @@ require 'database.php';
               type="number"
               class="form-control mb-2"
               name="physical"
-              value="<?php echo htmlspecialchars($player['players.physical']); ?>"
+              value="<?php echo htmlspecialchars($player['physical']); ?>"
               placeholder="Physical"
               required
           />
@@ -121,7 +121,7 @@ require 'database.php';
               type="number"
               class="form-control mb-2"
               name="rating"
-              value="<?php echo htmlspecialchars($player['players.rating']); ?>"
+              value="<?php echo htmlspecialchars($player['rating']); ?>"
               placeholder="Rating"
               required
           />
@@ -135,8 +135,33 @@ require 'database.php';
               Cancel
           </button>
       </form>
-    </div>
     
-
+    </div>
+    <?php
+     if(isset($_POST['submit'])){
+    //       $query="update  players set nom=".$player['nom'].",photo=".$playerPhoto.",clubID=2,nationalityID=3,rating=".$rating.",shooting=".$shooting.",passing=".$passing.",pace=".$pace.",dribbling=".$dribbling.",defending=".$defending.",physical=".$physical.",position=".$position." where playerID=".$playerID."";
+    //  $result= mysqli_query($connect,$query);
+    $playerName=$_POST['playerName'];
+    $playerPhoto=$_POST['playerPhoto'];
+    $clubName=$_POST['playerID'];
+    $nationalityName=$_POST['playerID'];
+    $position=$_POST['position'];
+    $pace=$_POST['pace'];
+    $shooting=$_POST['shooting'];
+    $passing=$_POST['passing'];
+    $dribbling=$_POST['dribbling'];
+    $defending=$_POST['defending'];
+    $physical=$_POST['physical'];
+    $rating=$_POST['rating'];
+    $query="update  players set nom='$playerName',photo='$playerPhoto',clubID=2,nationalityID=3,rating='$rating',shooting='$shooting',passing='$passing',pace='$pace',dribbling='$dribbling',defending='$defending',physical='$physical',position='$position' where playerID='$playerID'";
+     $result= mysqli_query($connect,$query);
+     }
+   
+     
+     ?>
+    
+    
+   
+   
 </body>
 </html>
