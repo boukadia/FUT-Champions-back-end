@@ -194,8 +194,7 @@
         name="rating"
         placeholder="Rating"
     />
-    <!-- <input type="submit" name="submit" value="add" > -->
-    <button type="submit" name="submit" class="btn btn-success mb-2">Submit</button>
+    <button type="submit" name="submit" id='submet' class="btn btn-success mb-2 ">Submit</button>
     <button
         type="button"
         class="btn btn-secondary mb-2"
@@ -204,11 +203,8 @@
         Cancel
     </button>
 </form>
-
     </div>
-  
-    <div class="footer">
-      
+    <div class="footer"> 
     </div>
 
   <?php include 'getPlayers.php'; ?>
@@ -216,12 +212,15 @@
 
 
     <script>
+      let submet = document.getElementById("submet");
       function showForm(action) {
         const form = document.getElementById("form");
         const title = document.getElementById("form-title");
         form.style.display = "block";
       }
-
+submet.onclick=function(){
+  document.getElementById("form").style.display = "none";
+}
       function hideForm() {
         document.getElementById("form").style.display = "none";
       }

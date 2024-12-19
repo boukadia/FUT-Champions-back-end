@@ -5,13 +5,13 @@ require 'header.html';
 require 'database.php';
 
 
-$query = "SELECT players.playerID, players.nom, club.clubName, nationality.nationalityName, players.position, players.rating, players.pace, players.shooting, players.passing, players.dribbling, players.defending, players.physical
+$query = "SELECT players.playerID, players.nom,players.photo, club.clubName, nationality.nationalityName, players.position, players.rating, players.pace, players.shooting, players.passing, players.dribbling, players.defending, players.physical
   FROM players
         JOIN club ON players.clubID = club.clubID
         JOIN nationality  ON players.nationalityID = nationality.nationalityID";
 
 $result = mysqli_query($connect,$query);
-// $res=$result
+
 ?>
 
 <i  class="bi bi-pencil-square text-danger"></i>
@@ -23,6 +23,7 @@ $result = mysqli_query($connect,$query);
         <thead>
             <tr>
                 <th>Player Name</th>
+                <th>photo</th>
                 <th>Team</th>
                 <th>Nationality</th>
                 <th>Position</th>
@@ -45,6 +46,7 @@ $result = mysqli_query($connect,$query);
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
                              <td>" . htmlspecialchars($row['nom']) . "</td>
+        <td><img src=\"" . htmlspecialchars($row['photo']) . "\" alt=\"Player Photo\" style=\"width:100px; height:100px;\"></td>
                     <td>" . htmlspecialchars($row['clubName']) . "</td>
                     <td>" . htmlspecialchars($row['nationalityName']) . "</td>
                     <td>" . htmlspecialchars($row['position']) . "</td>

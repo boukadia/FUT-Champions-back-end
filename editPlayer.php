@@ -126,7 +126,7 @@ require 'database.php';
               required
           />
 
-          <button type="submit" name="submit" class="btn btn-success mb-2">Submit</button>
+          <button type="submit" name="submit" class="btn btn-success mb-2">edit</button>
           <button
               type="button"
               class="btn btn-secondary mb-2"

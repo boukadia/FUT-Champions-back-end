@@ -2,10 +2,6 @@
 <?php 
     require 'header.html';
     require 'database.php';
-    
-
-
-
 if (isset($_GET['id'])) {
     $playerID = intval($_GET['id']);
 
