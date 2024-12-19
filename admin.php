@@ -100,7 +100,10 @@
     />
 
    
-    <select class="form-control mb-2" name="clubName">
+
+    
+                    
+    <!-- <select class="form-control mb-2" name="clubName">
         <option value="" disabled selected>Choose Team</option>
         <option  value="1">Paris Saint-Germain </option>
         <option value="2">Al-Nassr</option>
@@ -115,10 +118,40 @@
         <option value="11">Al-Ittihad</option>
         <option value="12">Fenerbahçe</option>
         <option value="13">PSV</option>
-    </select>
+    </select> -->
 
   
-    <select class="form-control mb-2" name="nationalityName">
+<?php include "database.php" ?>
+    <!-- ======================================================== -->
+    <select name="nationalityName" >
+                        <option value="">choisir le nationality</option>
+                        <?php
+                        $query = "SELECT * FROM nationality";
+                        $result = mysqli_query($connect, $query);
+                        while($rowNationality = mysqli_fetch_assoc($result)){
+                            echo '<option value="'.$rowNationality['nationalityID'].'">'.$rowNationality['nationalityName'].'</option>';
+                           
+                        }
+                        ?> 
+                    </select>
+                    <select name="clubName" >
+                        <option value="">choisir le club</option>
+                        <?php
+                        $query = "SELECT * FROM club";
+                        $result = mysqli_query($connect, $query);
+                        while($rowNationality = mysqli_fetch_assoc($result)){
+                            echo '<option value="'.$rowNationality['clubID'].'">'.$rowNationality['clubName'].'</option>';
+                           
+                        }
+                        ?> 
+                    </select>
+
+
+
+
+
+    <!-- ============================================================== -->
+    <!-- <select class="form-control mb-2" name="nationalityName">
         <option value="" disabled selected>Choose Nationality</option>
         <option  value="1">Argentina</option>
         <option value="2">Portugal</option>
@@ -135,7 +168,7 @@
         <option value="13">Canada</option>
         <option value="14">Italy</option>
         <option value="15">England</option>
-    </select>
+    </select> -->
 
     <select class="form-control mb-2" name="position">
         <option value="" disabled selected>Choose Position</option>

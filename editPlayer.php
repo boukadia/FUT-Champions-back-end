@@ -45,7 +45,7 @@ require 'database.php';
       <h3 id="form-title">Edit Player</h3>
       <form action="" method="POST">
           <input class="form-control mb-2" type="hidden" name="playerID" value="<?php echo $player['playerID']; ?>">
-
+<label class="form-control mb-2" for="">playerName</label>
           <input
               type="text"
               class="form-control mb-2"
@@ -54,7 +54,7 @@ require 'database.php';
               placeholder="Player Name"
               required
           />
-          
+          <label class="form-control mb-2" for="">player photo</label>
           <input
               type="url"
               class="form-control mb-2"
@@ -62,13 +62,38 @@ require 'database.php';
               value="<?php echo htmlspecialchars($player['photo']); ?>"
               placeholder="Player Photo URL"
           />
-        
+
+          <!-- <label class="form-control mb-2" for="">nationalityName</label>
           <input class="form-control mb-2" type="text" name="nationalityName" value="<?php echo htmlspecialchars($player['nationalityName']) ?>" >
-
+          <label class="form-control mb-2" for="">position</label>
           <input class="form-control mb-2" type="text" name="position" value="<?php echo htmlspecialchars($player['position']); ?>">
-
+          <label class="form-control mb-2" for="">clubName</label>
           <input class="form-control mb-2" type="text" name="clubName" value="<?php echo htmlspecialchars($player['clubName']); ?>">
+          <label class="form-control mb-2" for="">pace</label> -->
 
+
+          <select name="nationalityName" >
+                        <option value="">choisir le nationality</option>
+                        <?php
+                        $query = "SELECT * FROM nationality";
+                        $result = mysqli_query($connect, $query);
+                        while($rowNationality = mysqli_fetch_assoc($result)){
+                            echo '<option value="'.$rowNationality['nationalityID'].'">'.$rowNationality['nationalityName'].'</option>';
+                           
+                        }
+                        ?> 
+                    </select>
+                    <select name="clubName" >
+                        <option value="">choisir le club</option>
+                        <?php
+                        $query = "SELECT * FROM club";
+                        $result = mysqli_query($connect, $query);
+                        while($rowNationality = mysqli_fetch_assoc($result)){
+                            echo '<option value="'.$rowNationality['clubID'].'">'.$rowNationality['clubName'].'</option>';
+                           
+                        }
+                        ?> 
+                    </select>
           <input
               type="number"
               class="form-control mb-2"
@@ -77,6 +102,7 @@ require 'database.php';
               placeholder="Pace"
               required
           />
+          <label class="form-control mb-2" for="">shooting</label>
           <input
               type="number"
               class="form-control mb-2"
@@ -85,6 +111,7 @@ require 'database.php';
               placeholder="Shooting"
               required
           />
+          <label class="form-control mb-2" for="">passing</label>
           <input
               type="number"
               class="form-control mb-2"
@@ -93,6 +120,7 @@ require 'database.php';
               placeholder="Passing"
               required
           />
+          <label class="form-control mb-2" for="">dribbling</label>
           <input
               type="number"
               class="form-control mb-2"
@@ -101,6 +129,7 @@ require 'database.php';
               placeholder="Dribbling"
               required
           />
+          <label class="form-control mb-2" for="">defending</label>
           <input
               type="number"
               class="form-control mb-2"
@@ -109,6 +138,7 @@ require 'database.php';
               placeholder="Defending"
               required
           />
+          <label class="form-control mb-2" for="">physical</label>
           <input
               type="number"
               class="form-control mb-2"
@@ -117,6 +147,7 @@ require 'database.php';
               placeholder="Physical"
               required
           />
+          <label class="form-control mb-2" for="">rating</label>
           <input
               type="number"
               class="form-control mb-2"
@@ -143,9 +174,9 @@ require 'database.php';
     //  $result= mysqli_query($connect,$query);
     $playerName=$_POST['playerName'];
     $playerPhoto=$_POST['playerPhoto'];
-    $clubName=$_POST['playerID'];
-    $nationalityName=$_POST['playerID'];
-    $position=$_POST['position'];
+    $clubName=$_POST['clubName'];
+    $nationalityName=$_POST['nationalityName'];
+    // $position=$_POST['position'];
     $pace=$_POST['pace'];
     $shooting=$_POST['shooting'];
     $passing=$_POST['passing'];
@@ -153,7 +184,12 @@ require 'database.php';
     $defending=$_POST['defending'];
     $physical=$_POST['physical'];
     $rating=$_POST['rating'];
-    $query="update  players set nom='$playerName',photo='$playerPhoto',clubID=2,nationalityID=3,rating='$rating',shooting='$shooting',passing='$passing',pace='$pace',dribbling='$dribbling',defending='$defending',physical='$physical',position='$position' where playerID='$playerID'";
+
+   
+    
+
+
+    $query="update players set nom='$playerName',photo='$playerPhoto',rating='$rating',shooting='$shooting',passing='$passing',clubID='$clubName',nationalityID='$nationalityName',pace='$pace',dribbling='$dribbling',defending='$defending',physical='$physical' where playerID='$playerID' ";
      $result= mysqli_query($connect,$query);
      }
    
