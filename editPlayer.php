@@ -63,23 +63,28 @@ require 'database.php';
               placeholder="Player Photo URL"
           />
 
-          <!-- <label class="form-control mb-2" for="">nationalityName</label>
-          <input class="form-control mb-2" type="text" name="nationalityName" value="<?php echo htmlspecialchars($player['nationalityName']) ?>" >
-          <label class="form-control mb-2" for="">position</label>
-          <input class="form-control mb-2" type="text" name="position" value="<?php echo htmlspecialchars($player['position']); ?>">
-          <label class="form-control mb-2" for="">clubName</label>
-          <input class="form-control mb-2" type="text" name="clubName" value="<?php echo htmlspecialchars($player['clubName']); ?>">
-          <label class="form-control mb-2" for="">pace</label> -->
-
-
+         
+         
+          <!-- <select name="position" > -->
+              <!-- <option value="">position</option> -->
+              <!-- <?php
+                        // $query = "SELECT * FROM players";
+                        // $result = mysqli_query($connect, $query);
+                        // while($rowPosition = mysqli_fetch_assoc($result)){
+                        //     echo '<option value="'.$rowPosition['position'].'">'.$rowPosition['position'].'</option>';
+                            
+                        // }
+                        // ?> 
+                    <!-- </select> -->
+          
           <select name="nationalityName" >
-                        <option value="">choisir le nationality</option>
-                        <?php
+              <option value="">choisir le nationality</option>
+              <?php
                         $query = "SELECT * FROM nationality";
                         $result = mysqli_query($connect, $query);
                         while($rowNationality = mysqli_fetch_assoc($result)){
                             echo '<option value="'.$rowNationality['nationalityID'].'">'.$rowNationality['nationalityName'].'</option>';
-                           
+                            
                         }
                         ?> 
                     </select>
@@ -90,11 +95,12 @@ require 'database.php';
                         $result = mysqli_query($connect, $query);
                         while($rowNationality = mysqli_fetch_assoc($result)){
                             echo '<option value="'.$rowNationality['clubID'].'">'.$rowNationality['clubName'].'</option>';
-                           
+                            
                         }
                         ?> 
                     </select>
-          <input
+        <label class="form-control mb-2" for="">pace</label>
+        <input
               type="number"
               class="form-control mb-2"
               name="pace"

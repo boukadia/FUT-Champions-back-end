@@ -75,15 +75,21 @@
    
     <div class="container">
       <div class="button-group mb-3 text-right">
-        <button class="btn btn-primary" onclick="showForm('add')">
+        <button class="btn btn-primary" onclick="showForm('playerForm')">
           Add Player
+        </button>
+        <button class="btn btn-primary" onclick="showForm('nationalityForm')">
+          Add Nationality
+        </button>
+        <button class="btn btn-primary" onclick="showForm('clubForm')">
+          Add Club
         </button>
        
       </div>
     </div>
 
    
-    <div id="form" class="container" style="display: none">
+    <div id="playerForm" class="container" style="display: none">
       <h3 id="form-title">Add Player</h3>
       <form action="addPlayer.php" method="POST">
     <input
@@ -98,28 +104,26 @@
         name="playerPhoto"
         placeholder="Player photo"
     />
+    <select class="form-control mb-2" name="position">
+        <option value="" disabled selected>Choose Position</option>
+        <option class="gk" value="gk">GK</option>
+        <option class="cb1" value="cb">CB</option>
+        <option class="cb2" value="cb">CB</option>
+        <option class="lb" value="lb">LB</option>
+        <option class="rb" value="rb">RB</option>
+        <option class="cdm" value="cdm">CDM</option>
+        <option class="cm" value="cm">CM</option>
+        <option class="cam" value="cam">CAM</option>
+        <option class="lw" value="lw">LW</option>
+        <option class="rw" value="rw">RW</option>
+        <option class="st" value="st">ST</option>
+    </select>
 
    
 
     
                     
-    <!-- <select class="form-control mb-2" name="clubName">
-        <option value="" disabled selected>Choose Team</option>
-        <option  value="1">Paris Saint-Germain </option>
-        <option value="2">Al-Nassr</option>
-        <option value="3">Real Madrid</option>
-        <option value="4">Manchester United </option>
-        <option value="5"> Inter Miami </option>
-        <option value="6">Manchester City</option>
-        <option value="7">Liverpool</option>
-        <option value="8">Al-Hilal</option>
-        <option value="9">Bayern Munich</option>
-        <option value="10">Atletico Madrid</option>
-        <option value="11">Al-Ittihad</option>
-        <option value="12">Fenerbahçe</option>
-        <option value="13">PSV</option>
-    </select> -->
-
+   
   
 <?php include "database.php" ?>
     <!-- ======================================================== -->
@@ -146,44 +150,7 @@
                         ?> 
                     </select>
 
-
-
-
-
-    <!-- ============================================================== -->
-    <!-- <select class="form-control mb-2" name="nationalityName">
-        <option value="" disabled selected>Choose Nationality</option>
-        <option  value="1">Argentina</option>
-        <option value="2">Portugal</option>
-        <option value="3">Belgium</option>
-        <option value="4">france</option>
-        <option value="5">Netherlands</option>
-        <option value="6">Germany</option>
-        <option value="7">Brazil</option>
-        <option value="8">Egypt</option>
-        <option value="9">Slovenia</option>
-        <option value="10">Croatia</option>
-        <option value="11">Morocco</option>
-        <option value="12">Norway</option>
-        <option value="13">Canada</option>
-        <option value="14">Italy</option>
-        <option value="15">England</option>
-    </select> -->
-
-    <select class="form-control mb-2" name="position">
-        <option value="" disabled selected>Choose Position</option>
-        <option class="gk" value="gk">GK</option>
-        <option class="cb1" value="cb">CB</option>
-        <option class="cb2" value="cb">CB</option>
-        <option class="lb" value="lb">LB</option>
-        <option class="rb" value="rb">RB</option>
-        <option class="cdm" value="cdm">CDM</option>
-        <option class="cm" value="cm">CM</option>
-        <option class="cam" value="cam">CAM</option>
-        <option class="lw" value="lw">LW</option>
-        <option class="rw" value="rw">RW</option>
-        <option class="st" value="st">ST</option>
-    </select>
+    
 
     <input
         type="number"
@@ -241,22 +208,93 @@
     </div>
 
   <?php include 'getPlayers.php'; ?>
+ <!-- Nationality Form -->
+ <div id="nationalityForm" class="container" style="display: none">
+      <h3>Add Nationality</h3>
+      <form action="addNationality.php" method="POST">
+        <input
+          type="text"
+          class="form-control mb-2"
+          name="nationalityName"
+          placeholder="Nationality Name"
+        />
+        <input
+          type="url"
+          class="form-control mb-2"
+          name="nationalityPhoto"
+          placeholder="Nationality url"
+        />
+        <button type="submit" class="btn btn-success mb-2">Submit</button>
+        <button
+          type="button"
+          class="btn btn-secondary mb-2"
+          onclick="hideForm()"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
 
+   
+  
+
+
+<div id="clubForm" class="container" style="display: none">
+  <h3>Add Club</h3>
+  <form action="addClub.php" method="POST">
+ 
+    <input
+      type="text"
+      class="form-control mb-2"
+      name="clubName"
+      placeholder="Club Name"
+    />
+    
+    
+    <input
+      type="url"
+      class="form-control mb-2"
+      name="clubPhoto"
+      placeholder="Club url"
+    />
+    
+    <button type="submit" class="btn btn-success mb-2">Submit</button>
+    <button
+      type="button"
+      class="btn btn-secondary mb-2"
+      onclick="hideForm()"
+    >
+      Cancel
+    </button>
+  </form>
+</div>
+
+
+
+
+    <div class="footer"></div>
+
+    
 
 
     <script>
-      let submet = document.getElementById("submet");
-      function showForm(action) {
-        const form = document.getElementById("form");
-        const title = document.getElementById("form-title");
-        form.style.display = "block";
+   
+      function showForm(formId) {
+        
+        document.getElementById("playerForm").style.display = "none";
+        document.getElementById("nationalityForm").style.display = "none";
+        document.getElementById("clubForm").style.display = "none";
+
+     
+        document.getElementById(formId).style.display = "block";
       }
-submet.onclick=function(){
-  document.getElementById("form").style.display = "none";
-}
+
       function hideForm() {
-        document.getElementById("form").style.display = "none";
+        document.getElementById("playerForm").style.display = "none";
+        document.getElementById("nationalityForm").style.display = "none";
+        document.getElementById("clubForm").style.display = "none";
       }
+   
     </script>
   </body>
 </html>

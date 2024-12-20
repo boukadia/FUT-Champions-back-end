@@ -10,6 +10,8 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-wrap:wrap;
+            gap:1rem;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -18,7 +20,7 @@
         }
         .player-card {
             background: #fff;
-            width: 350px;
+            width: 14rem;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -30,8 +32,8 @@
             padding: 20px;
         }
         .player-header img {
-            width: 100px;
-            height: 100px;
+            width: 3rem;
+            height: 3rem;
             border-radius: 50%;
             margin-bottom: 10px;
             border: 3px solid white;
@@ -78,7 +80,7 @@ include "header.html";
 
 $query = "SELECT players.playerID, players.nom, players.photo, club.clubPhoto, nationality.nationalityPhoto, 
                  players.position, players.rating, players.pace, players.shooting, players.passing, 
-                 players.dribbling, players.defending, players.physical
+                 players.dribbling, players.defending, players.physical,players.position
           FROM players
           JOIN club ON players.clubID = club.clubID
           JOIN nationality ON players.nationalityID = nationality.nationalityID";
@@ -99,6 +101,10 @@ $result = mysqli_query($connect, $query);
 
   
         <div class="player-body">
+            <div class="stat">
+                <span>position:</span>
+                <span><?php echo htmlspecialchars($row['position']); ?></span>
+            </div>
             <div class="stat">
                 <span>Rating:</span>
                 <span><?php echo htmlspecialchars($row['rating']); ?></span>
@@ -131,7 +137,8 @@ $result = mysqli_query($connect, $query);
 
     
         <div class="player-footer">
-            <a href="#">Edit Player</a>
+            <button type="button">add Player</button>
+            
         </div>
     </div>
 <?php  }?>
