@@ -19,5 +19,13 @@ $query="INSERT INTO players(nom,photo,clubID,nationalityID,rating,shooting,passi
             '$defending','$physical','$position')";
 $result= mysqli_query($connect,$query);
 
+if ($result) {
+
+    header("Location: admin.php");
+    exit(); 
+} else {
+    echo "Erreur! " . mysqli_error($connect);
+}
+
 
 ?>

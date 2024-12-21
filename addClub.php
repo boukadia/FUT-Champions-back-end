@@ -8,19 +8,14 @@ include "database.php";
 
     
 
-    if (!$connect) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-
-    
+   
     $query = "INSERT INTO club (clubName, clubPhoto) VALUES ('$clubName', '$clubUrl')";
     
-    if (mysqli_query($connect, $query)) {
-        echo "New club added successfully";
-    } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($connect);
-    }
-
+    $result=mysqli_query($connect, $query);
     mysqli_close($connect);
+        header("Location: admin.php");
+      
+   
+    
 
 ?>

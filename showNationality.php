@@ -91,10 +91,10 @@ $result = mysqli_query($connect, $query);
         </div>
 
         <div class="nationality-footer">
-            <a href="./editNationality"><button type="button">modification</button></a>
+        <?php echo" <a href=\"editNationality.php?id=" . $row['nationalityID'] . "\"><i class=\"fa-regular fa-pen-to-square\"></i></a>";?>
         </div>
         <div class="nationality-footer">
-            <a href="./editClub"><button type="button">supprimer</button></a>
+        <?php echo" <a href=\"deleteNationality.php?id=" . $row['nationalityID'] . "\"><i class=\"bi bi-trash-fill\"></i></a>";?>
         </div>
     </div>
 <?php } ?>

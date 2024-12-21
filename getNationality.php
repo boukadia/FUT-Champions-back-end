@@ -103,6 +103,7 @@ $result = mysqli_query($connect,$query);
         <div class="player-footer">
             
         <?php echo" <a href=\"editNationality.php?id=" . $row['nationalityID'] . "\"><i class=\"fa-regular fa-pen-to-square\"></i></a>";?>
+        <?php echo" <a href=\"deleteNationality.php?id=" . $row['nationalityID'] . "\"><i class=\"bi bi-trash-fill\"></i></a>";?>
             
         
     </div>
